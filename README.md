@@ -4,19 +4,27 @@
 
 ### Преимущества журнала:
 
-:white_check_mark: Живой поиск    
-:white_check_mark: Роутинг без перезагрузки    
-:white_check_mark: Реактивные данные    
-:white_check_mark: Простота в использовании    
-:white_check_mark: Приятный дизайн    
+:white_check_mark: Живой поиск  
+:white_check_mark: Роутинг без перезагрузки  
+:white_check_mark: Реактивные данные  
+:white_check_mark: Простота в использовании  
+:white_check_mark: Приятный дизайн
 
 ---
+
+### Скачивание проекта
+
+```
+git clone https://github.com/DERUINO/system-control-v2.git
+git submodule init
+```
 
 ### Запуск (сервер)
 
 #### В корневой директории выполнить команду
 
 ```
+npm install
 npm start
 ```
 
@@ -26,6 +34,7 @@ npm start
 
 ```
 cd /front
+npm install
 npm run serve
 ```
 
@@ -33,5 +42,6 @@ npm run serve
 
 ```
 cd /front
+npm install
 npm run build
 ```
