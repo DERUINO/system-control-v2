@@ -2,15 +2,13 @@
 
 ## Обновленный электронный журнал на node.js и vue.js
 
----
-
 ### Преимущества журнала:
 
-:white_check_mark: Живой поиск
-:white_check_mark: Роутинг без перезагрузки
-:white_check_mark: Реактивные данные
-:white_check_mark: Простота в использовании
-:white_check_mark: Приятный дизайн
+:white_check_mark: Живой поиск    
+:white_check_mark: Роутинг без перезагрузки    
+:white_check_mark: Реактивные данные    
+:white_check_mark: Простота в использовании    
+:white_check_mark: Приятный дизайн    
 
 ---
 
