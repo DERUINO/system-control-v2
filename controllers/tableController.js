@@ -3,13 +3,44 @@ const Table = require('../models/Table')
 class tableController {
     async getTables(req, res) {
         try {
-            const tables = await Table.find().sort({dateStart: -1})
+            const tables = await Table.find().sort({ dateStart: -1 })
+            const count = await Table.find().count()
+            res.json({data: tables, status: 200, count: count})
+        } catch (e) {
+            console.log(e)
+            res.status(400).json({message: 'response error'})
+        }
+    }
+
+    async getFilteredTables(req, res) {
+        try {
+            const { name, type } = req.body
+            const filteredName = new RegExp(name, 'i')
+            const tables = await Table.find({ [type]: filteredName }).sort({ dateStart: -1 })
+            const count = await Table.find({ [type]: filteredName }).count()
+            res.json({data: tables, status: 200, count: count})
+        } catch (e) {
+            console.log(e)
+            res.status(400).json({message: 'response error'})
+        }
+    }
+
+    async getPaginatedTables(req, res) {
+        try {
+            const { page } = req.body
+
+            if (page < 0)
+                return res.status(400).json({ message: 'Как ты собрался смотреть нулевую страницу?' })
+
+            const tables = await Table.find().sort({ dateStart: -1 }).skip(page * 50).limit(50)
             res.json({data: tables, status: 200})
         } catch (e) {
             console.log(e)
             res.status(400).json({message: 'response error'})
         }
     }
+
+
 
     async addTable(req, res) {
         try {
