@@ -3,6 +3,7 @@ const router = new Router()
 const controller = require('../controllers/tableController')
 
 router.post('/gettables', controller.getTables)
+router.post('/getusers', controller.getUsers)
 router.post('/getfilteredtables', controller.getFilteredTables)
 router.post('/getpaginatedtables', controller.getPaginatedTables)
 router.post('/addtable', controller.addTable)
