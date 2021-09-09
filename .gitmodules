@@ -1,3 +1,4 @@
 [submodule "front_path"]
 	path = front_path
 	url = https://github.com/DERUINO/front_path.git
+	branch = master
