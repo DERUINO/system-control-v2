@@ -17,7 +17,7 @@ app.use('/settings', settingsRouter)
 const start = async () => {
     try {
         await mongoose.connect("mongodb://localhost:27017/vue", { useUnifiedTopology: true, useNewUrlParser: true })
-        app.listen(PORT, () => console.log(`server started on port ${PORT}`))
+        app.listen(PORT, () => console.log(`local server started on port ${PORT}`))
     } catch (e) {
         console.log(e)
     }
