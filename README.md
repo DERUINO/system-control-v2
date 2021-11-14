@@ -33,28 +33,14 @@ npm install
 npm start
 ```
 
-### Запуск (клиент)
+### Ссылка на клиент приложения
+
+<<<<<<< HEAD
 
 #### В корневой директории выполнить команды (dev режим)
 
 ```
-<<<<<<< HEAD
-cd /front
-npm install
-=======
-cd /front_path
->>>>>>> dev
-npm run serve
-```
-
-#### В корневой директории выполнить команды (сборка клиента)
-
-```
-<<<<<<< HEAD
-cd /front
-npm install
-=======
-cd /front_path
->>>>>>> dev
 npm run build
 ```
+
+[Клиент](https://github/DERUINO/system-control-v2-client)
