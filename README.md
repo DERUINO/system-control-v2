@@ -15,13 +15,6 @@
 
 ---
 
-### Скачивание проекта
-
-```
-git clone https://github.com/DERUINO/system-control-v2.git
-git submodule init
-```
-
 ### Запуск (сервер)
 
 (Для работы приложения необходим установленый node js 14+, mongodb)
