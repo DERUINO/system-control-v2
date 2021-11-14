@@ -4,13 +4,13 @@
 
 ### Преимущества журнала:
 
-:white_check_mark: Производительность    
-:white_check_mark: Реактивные данные    
-:white_check_mark: Адаптивная верстка (bootstrap 5)    
-:white_check_mark: Живой поиск    
-:white_check_mark: Роутинг без перезагрузки    
-:white_check_mark: Реактивная пагинация    
-:white_check_mark: Простота в использовании    
+:white_check_mark: Производительность  
+:white_check_mark: Реактивные данные  
+:white_check_mark: Адаптивная верстка (bootstrap 5)  
+:white_check_mark: Живой поиск  
+:white_check_mark: Роутинг без перезагрузки  
+:white_check_mark: Реактивная пагинация  
+:white_check_mark: Простота в использовании  
 :white_check_mark: Приятный дизайн
 
 ---
@@ -25,18 +25,6 @@
 npm start
 ```
 
-### Запуск (клиент)
+### Ссылка на клиент приложения
 
-#### В корневой директории выполнить команды (dev режим)
-
-```
-cd /front_path
-npm run serve
-```
-
-#### В корневой директории выполнить команды (сборка клиента)
-
-```
-cd /front_path
-npm run build
-```
+[Клиент](https://github/DERUINO/system-control-v2-client)
