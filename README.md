@@ -33,12 +33,6 @@ npm install
 npm start
 ```
 
-#### В корневой директории выполнить команды (dev режим)
-
-```
-npm run build
-```
-
 ### Ссылка на клиент приложения
 
 [Клиент](https://github/DERUINO/system-control-v2-client)
