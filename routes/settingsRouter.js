@@ -11,6 +11,7 @@ router.post('/addspec', controller.addSpec)
 router.post('/deletespec', controller.deleteSpec)
 router.post('/getspecs', controller.getSpecs)
 router.post('/getusers', authMiddleware, controller.getUsers)
+router.post('/userinfo', authMiddleware, controller.getUserInfo)
 router.post('/getrooms', controller.getRooms)
 
 module.exports = router

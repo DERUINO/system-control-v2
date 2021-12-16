@@ -23,20 +23,20 @@ class authController {
             if (!errors.isEmpty())
                 return res.status(400).json({ message: 'Ошибка при регистрации', errors })
             
-            const {username, password} = req.body
+            const {username, password, confirmpass, email} = req.body
             const candidate = await Account.findOne({ username }).lean()
             
             if (candidate)
-                return res.status(400).json({message: 'Пользователь с таким именем уже существует'})
+                return res.status(400).json({ errors: { errors: [{ msg: 'Пользователь с таким именем уже существует' }] } })
 
-            // if (password !== confirmpass)
-            //     return res.status(400).json({message: 'Пароли не совпадают'})
+            if (password !== confirmpass)
+                return res.status(400).json({ errors: { errors: [{ msg: 'Пароли не совпадают' }] } })
 
             const hashPassword = bcrypt.hashSync(password, 7);
             const userRole = await Role.findOne({value: 'USER'}).lean()
-            const user = new Account({ username, password: hashPassword, roles: [userRole.value] })
+            const user = new Account({ username, password: hashPassword, email, roles: [userRole.value] })
             await user.save()
-            return res.json({message: 'пользователь успешно зарегистрирован'})
+            return res.json({ message: 'пользователь успешно зарегистрирован', status: 200 })
         } catch (e) {
             console.log(e)
             res.status(400).json({message: 'response error'})

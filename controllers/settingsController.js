@@ -2,6 +2,7 @@ const User = require('../models/User')
 const Room = require('../models/Room')
 const Spec = require('../models/Spec')
 const { ObjectId } = require('mongoose').Types;
+const Account = require('../models/Account');
 
 class settingsController {
     async addRoom(req, res) {
@@ -129,6 +130,18 @@ class settingsController {
         } catch (e) {
             console.log(e)
             res.status(400).json({message: 'response error'})
+        }
+    }
+
+    async getUserInfo(req, res) {
+        try {
+            const { id } = req.body;
+
+            const user = await Account.findOne({ _id: id }).lean();
+            res.json({ data: user, status: 200 });
+        } catch (e) {
+            console.log(e);
+            res.status(400).json({message: 'response error'});
         }
     }
 }
