@@ -1,6 +1,8 @@
 const Table = require('../models/Table')
 const User = require('../models/User')
-
+const Room = require('../models/Room')
+const Spec = require('../models/Spec')
+const { ObjectId } = require('mongoose').Types;
 class tableController {
     async getTables(req, res) {
         try {
@@ -70,15 +72,22 @@ class tableController {
     async addTable(req, res) {
         try {
             const { username, spec, room, genre } = req.body
-            // const checkRoom = await Table.findOne({ room, getout: false }).populate('room').lean()
+            const checkRoom = await Table.findOne({ 'room._id': ObjectId(room.toString()), getout: false }).lean()
+
+            if (checkRoom)
+                return res.status(400).json({ message: 'Данный класс уже занят' })
             
-            // if (checkRoom)
-            //     return res.status(400).json({ message: 'Данный класс уже занят' })
+            const filteredRoom = await Room.findOne({ _id: room });
+            const filteredSpec = await Spec.findOne({ _id: spec });
             
-            const update = new Table({ username, spec, room, genre, createdAt: Date.now(), updatedAt: Date.now(), getout: false })
+            const update = new Table({
+                username, spec: filteredSpec,
+                room: filteredRoom,
+                genre,
+                getout: false
+            })
             await update.save()
-            const resData = await Table.findOne({ _id: update._id }).populate([{path: 'spec'}, {path: 'room'}]).lean()
-            res.json({data: resData, status: 200, message: 'Запись успешно добавлена'})
+            res.json({data: update, status: 200, message: 'Запись успешно добавлена'})
         } catch (e) {
             console.log(e)
             res.status(400).json({message: 'response error'})

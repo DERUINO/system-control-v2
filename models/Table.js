@@ -1,14 +1,13 @@
 const { Int32 } = require('mongodb')
 const { model, Schema } = require('mongoose')
-const ObjectId = Schema.ObjectId
 
 const Table = new Schema({
     username: { type: String, required: true },
-    spec: { type: ObjectId, required: true, ref: 'Spec' },
-    room: { type: ObjectId, required: true, ref: 'Room' },
+    spec: { type: Object, required: true },
+    room: { type: Object, required: true },
     genre: { type: String, required: true  },
-    createdAt: { type: Date, required: true },
-    updatedAt: { type: Date, required: true },
+    createdAt: { type: Date, required: false, default: Date.now() },
+    updatedAt: { type: Date, required: false, default: Date.now() },
     getout: { type: Boolean, required: true },
 })
 

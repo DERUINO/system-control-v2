@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const Room = require('../models/Room')
 const Spec = require('../models/Spec')
+const { ObjectId } = require('mongoose').Types;
 
 class settingsController {
     async addRoom(req, res) {
@@ -11,7 +12,7 @@ class settingsController {
             if (checkroom)
                 res.status(400).json({ message: 'Данный класс уже существует' })
             
-            const addroom = new Room({name, createdAt: Date.now(), updatedAt: Date.now()})
+            const addroom = new Room({ name })
             await addroom.save()
             res.json({data: addroom, status: 200, message: 'Новый класс успешно добавлен'})
         } catch (e) {
@@ -45,10 +46,11 @@ class settingsController {
             if (checkuser)
                 res.status(400).json({ message: 'Данный пользователь уже существует' })
             
-            const adduser = new User({username, spec, genre, createdAt: Date.now(), updatedAt: Date.now()})
+            const filteredSpec = await Spec.findOne({ _id: spec }).lean()
+            const adduser = new User({username, spec: filteredSpec, genre})
             await adduser.save()
-            const resData = await User.findOne({ _id: adduser._id }).populate('spec').lean()
-            res.json({data: resData, status: 200, message: 'Новый пользователь успешно добавлен'})
+
+            res.json({data: adduser, status: 200, message: 'Новый пользователь успешно добавлен'})
         } catch (e) {
             console.log(e)
             res.status(400).json({message: 'response error'})
