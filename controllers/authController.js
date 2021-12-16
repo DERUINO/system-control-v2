@@ -1,4 +1,4 @@
-const User = require('../models/User')
+const Account = require('../models/Account')
 const Role = require('../models/Role')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator')
@@ -23,18 +23,18 @@ class authController {
             if (!errors.isEmpty())
                 return res.status(400).json({ message: 'Ошибка при регистрации', errors })
             
-            const {username, password, confirmpass, email} = req.body
-            const candidate = await User.findOne({ username })
+            const {username, password} = req.body
+            const candidate = await Account.findOne({ username }).lean()
             
             if (candidate)
                 return res.status(400).json({message: 'Пользователь с таким именем уже существует'})
 
-            if (password !== confirmpass)
-                return res.status(400).json({message: 'Пароли не совпадают'})
+            // if (password !== confirmpass)
+            //     return res.status(400).json({message: 'Пароли не совпадают'})
 
             const hashPassword = bcrypt.hashSync(password, 7);
-            const userRole = await Role.findOne({value: 'USER'})
-            const user = new User({ username, password: hashPassword, email, roles: [userRole.value] })
+            const userRole = await Role.findOne({value: 'USER'}).lean()
+            const user = new Account({ username, password: hashPassword, roles: [userRole.value] })
             await user.save()
             return res.json({message: 'пользователь успешно зарегистрирован'})
         } catch (e) {
@@ -46,7 +46,7 @@ class authController {
     async login(req, res) {
         try {
             const { username, password } = req.body
-            const user = await User.findOne({ username })
+            const user = await Account.findOne({ username })
             
             if (!user)
                 return res.status(400).json({ message: `Пользователь ${username} не найден` })
@@ -66,8 +66,8 @@ class authController {
 
     async getUsers(req, res) {
         try {
-            const users = await User.find()
-            res.json(users)
+            const usersList = await Account.find().lean()
+            res.json({ data: usersList, status: 200 })
         } catch (e) {
             console.log(e)
             res.status(400).json({message: 'response error'})
