@@ -1,4 +1,3 @@
-const { Int32 } = require('mongodb')
 const { model, Schema } = require('mongoose')
 
 const Table = new Schema({

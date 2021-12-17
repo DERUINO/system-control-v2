@@ -81,7 +81,8 @@ class tableController {
             const filteredSpec = await Spec.findOne({ _id: spec });
             
             const update = new Table({
-                username, spec: filteredSpec,
+                username,
+                spec: filteredSpec,
                 room: filteredRoom,
                 genre,
                 getout: false

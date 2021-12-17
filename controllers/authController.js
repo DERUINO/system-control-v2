@@ -1,10 +1,10 @@
-const Account = require('../models/Account')
-const Role = require('../models/Role')
-const bcrypt = require('bcryptjs')
-const { validationResult } = require('express-validator')
-const jwt = require('jsonwebtoken')
-const {secret} = require('../config')
-const { ObjectId } = require('mongoose').Types;
+const Account = require('../models/Account');
+const Role = require('../models/Role');
+const Logs = require('../models/Logs');
+const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
+const {secret} = require('../config');
 
 const generateAccessToken = (id, roles) => {
     const payload = {
@@ -33,9 +33,12 @@ class authController {
                 return res.status(400).json({ errors: { errors: [{ msg: 'Пароли не совпадают' }] } })
 
             const hashPassword = bcrypt.hashSync(password, 7);
+
             const userRole = await Role.findOne({value: 'USER'}).lean()
+
             const user = new Account({ username, password: hashPassword, email, roles: [userRole.value] })
             await user.save()
+            
             return res.json({ message: 'пользователь успешно зарегистрирован', status: 200 })
         } catch (e) {
             console.log(e)
@@ -57,6 +60,7 @@ class authController {
                 return res.status(400).json({ message: `Неверный пароль` })
             
             const token = generateAccessToken(user._id, user.roles)
+
             return res.json({ token, status: 200 })
         } catch (e) {
             console.log(e)
