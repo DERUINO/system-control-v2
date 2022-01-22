@@ -72,10 +72,10 @@ class tableController {
     async addTable(req, res) {
         try {
             const { username, spec, room, genre } = req.body
-            const checkRoom = await Table.findOne({ 'room._id': ObjectId(room.toString()), getout: false }).lean()
+            // const checkRoom = await Table.findOne({ 'room._id': ObjectId(room.toString()), getout: false }).lean()
 
-            if (checkRoom)
-                return res.status(400).json({ message: 'Данный класс уже занят' })
+            // if (checkRoom)
+            //     return res.status(400).json({ message: 'Данный класс уже занят' })
             
             const filteredRoom = await Room.findOne({ _id: room });
             const filteredSpec = await Spec.findOne({ _id: spec });

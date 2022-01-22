@@ -22,4 +22,6 @@ router.post('/login', controller.login)
 
 router.get('/users', authMiddleware, controller.getUsers)
 
+router.get('/roles', controller.roles)
+
 module.exports = router

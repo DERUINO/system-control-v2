@@ -77,6 +77,19 @@ class authController {
             res.status(400).json({message: 'response error'})
         }
     }
+
+    async roles(req, res) {
+        try {
+            const userRole = new Role();
+            const adminRole = new Role({ value: 'ADMIN' })
+            await userRole.save()
+            await adminRole.save()
+            console.log('saved');
+        } catch (e) {
+            console.log(e)
+            res.status(400).json({message: 'response error'})
+        }
+    }
 }
 
 module.exports = new authController()
