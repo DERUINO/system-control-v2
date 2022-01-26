@@ -20,8 +20,11 @@ const PORT = process.env.PORT || 5000
 io.on('connection', socket => {
     console.log(`user ${socket.id} is connected`);
 
-    socket.on('message', data => {
-        socket.broadcast.emit('message:recieved', data);
+    socket.join(socket.recieveId);
+
+    socket.on('message', (data, cb) => {
+        console.log(data, cb);
+        socket.to(socket.recieveId).emit('message:recieved', data);
     })
 
     socket.on('disconnect', () => {
