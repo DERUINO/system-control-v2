@@ -15,16 +15,19 @@ const io = new Server(server, {
 const authRouter = require('./routes/authRouter')
 const tableRouter = require('./routes/tableRouter')
 const settingsRouter = require('./routes/settingsRouter')
+const chatRouter = require('./routes/chatRouter')
+
 const PORT = process.env.PORT || 5000
 
 io.on('connection', socket => {
     console.log(`user ${socket.id} is connected`);
 
-    socket.join(socket.recieveId);
+    socket.on('userJoined', (data, cb) => {
+        socket.join(data.userId);
+    })
 
     socket.on('message', (data, cb) => {
-        console.log(data, cb);
-        socket.to(socket.recieveId).emit('message:recieved', data);
+        socket.to(data.recieveId).emit('message:recieved', data);
     })
 
     socket.on('disconnect', () => {
@@ -40,6 +43,7 @@ app.use(express.json())
 app.use('/auth', authRouter)
 app.use('/tables', tableRouter)
 app.use('/settings', settingsRouter)
+app.use('/chat', chatRouter)
 
 const start = async () => {
     try {

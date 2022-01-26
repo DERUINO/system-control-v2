@@ -1,7 +1,6 @@
 const User = require('../models/User')
 const Room = require('../models/Room')
 const Spec = require('../models/Spec')
-const { ObjectId } = require('mongoose').Types;
 const Account = require('../models/Account');
 
 class settingsController {
