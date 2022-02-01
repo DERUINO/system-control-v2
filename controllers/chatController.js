@@ -12,7 +12,7 @@ class chatController {
     async getMessages(req, res) {
         const { authorId, recieveId } = req.body
 
-        const messages = await Chat.find({ $or: [{ authorId, recieveId }, {authorId: recieveId, recieveId: authorId}] }).lean()
+        const messages = await Chat.find({ $or: [{ authorId, recieveId }, {authorId: recieveId, recieveId: authorId}] }).populate('Account').lean()
         res.json({ status: 200, data: messages })
     }
 }
