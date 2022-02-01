@@ -13,5 +13,6 @@ router.post('/getspecs', controller.getSpecs)
 router.post('/getusers', authMiddleware, controller.getUsers)
 router.post('/userinfo', authMiddleware, controller.getUserInfo)
 router.post('/getrooms', controller.getRooms)
+router.get('/create_roles', controller.createRoles);
 
 module.exports = router

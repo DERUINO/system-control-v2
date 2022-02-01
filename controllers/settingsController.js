@@ -2,6 +2,7 @@ const User = require('../models/User')
 const Room = require('../models/Room')
 const Spec = require('../models/Spec')
 const Account = require('../models/Account');
+const Role = require('../models/Role');
 
 class settingsController {
     async addRoom(req, res) {
@@ -141,6 +142,18 @@ class settingsController {
         } catch (e) {
             console.log(e);
             res.status(400).json({message: 'response error'});
+        }
+    }
+
+    async createRoles(res) {
+        try {
+            const userRole = new Role({value: 'USER'});
+            const adminRole = new Role({value: 'ADMIN'});
+            await userRole.save();
+            await adminRole.save();
+            res.json({ status: 200 });
+        } catch (e) {
+            console.log(e);
         }
     }
 }
